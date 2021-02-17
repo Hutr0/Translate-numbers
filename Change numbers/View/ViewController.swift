@@ -8,7 +8,12 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    
+    let viewModel = ViewModel()
 
+    @IBOutlet weak var numberTextField: NSTextField!
+    @IBOutlet weak var resultLabel: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +26,7 @@ class ViewController: NSViewController {
         }
     }
 
-
+    @IBAction func translateButtonAction(_ sender: NSButton) {
+    }
 }
 

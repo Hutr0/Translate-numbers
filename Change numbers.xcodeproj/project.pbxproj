@@ -11,6 +11,7 @@
 		E078EFF625DD430100FA2152 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078EFF525DD430100FA2152 /* ViewController.swift */; };
 		E078EFF825DD430100FA2152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E078EFF725DD430100FA2152 /* Assets.xcassets */; };
 		E078EFFB25DD430100FA2152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E078EFF925DD430100FA2152 /* Main.storyboard */; };
+		E078F00D25DD45D100FA2152 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F00C25DD45D100FA2152 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		E078EFFA25DD430100FA2152 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E078EFFC25DD430100FA2152 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E078EFFD25DD430100FA2152 /* Change_numbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Change_numbers.entitlements; sourceTree = "<group>"; };
+		E078F00C25DD45D100FA2152 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,14 +55,39 @@
 		E078EFF225DD430100FA2152 /* Change numbers */ = {
 			isa = PBXGroup;
 			children = (
-				E078EFF325DD430100FA2152 /* AppDelegate.swift */,
-				E078EFF525DD430100FA2152 /* ViewController.swift */,
-				E078EFF725DD430100FA2152 /* Assets.xcassets */,
 				E078EFF925DD430100FA2152 /* Main.storyboard */,
+				E078F00425DD44A300FA2152 /* View */,
+				E078F00B25DD45AD00FA2152 /* ViewModel */,
+				E078F00625DD44B400FA2152 /* Support files */,
+			);
+			path = "Change numbers";
+			sourceTree = "<group>";
+		};
+		E078F00425DD44A300FA2152 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E078EFF525DD430100FA2152 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E078F00625DD44B400FA2152 /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				E078EFF325DD430100FA2152 /* AppDelegate.swift */,
+				E078EFF725DD430100FA2152 /* Assets.xcassets */,
 				E078EFFC25DD430100FA2152 /* Info.plist */,
 				E078EFFD25DD430100FA2152 /* Change_numbers.entitlements */,
 			);
-			path = "Change numbers";
+			path = "Support files";
+			sourceTree = "<group>";
+		};
+		E078F00B25DD45AD00FA2152 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E078F00C25DD45D100FA2152 /* ViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E078EFF625DD430100FA2152 /* ViewController.swift in Sources */,
+				E078F00D25DD45D100FA2152 /* ViewModel.swift in Sources */,
 				E078EFF425DD430100FA2152 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,12 +299,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Change numbers/Change_numbers.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Change numbers/Support files/Change_numbers.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VWW7MQ2767;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Change numbers/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Change numbers/Support files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -292,12 +320,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Change numbers/Change_numbers.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Change numbers/Support files/Change_numbers.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = VWW7MQ2767;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Change numbers/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Change numbers/Support files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
