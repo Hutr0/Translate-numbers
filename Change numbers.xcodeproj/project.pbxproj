@@ -12,8 +12,10 @@
 		E078EFF825DD430100FA2152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E078EFF725DD430100FA2152 /* Assets.xcassets */; };
 		E078EFFB25DD430100FA2152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E078EFF925DD430100FA2152 /* Main.storyboard */; };
 		E078F00D25DD45D100FA2152 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F00C25DD45D100FA2152 /* ViewModel.swift */; };
-		E078F01125DD46B700FA2152 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F01025DD46B700FA2152 /* Number.swift */; };
-		E078F01625DD725200FA2152 /* CheckHundreds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F01525DD725200FA2152 /* CheckHundreds.swift */; };
+		E078F01125DD46B700FA2152 /* NumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F01025DD46B700FA2152 /* NumberModel.swift */; };
+		E078F01625DD725200FA2152 /* HundredModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F01525DD725200FA2152 /* HundredModel.swift */; };
+		E078F01F25DDA12B00FA2152 /* UnitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F01E25DDA12B00FA2152 /* UnitModel.swift */; };
+		E078F02425DDA17100FA2152 /* TenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078F02325DDA17100FA2152 /* TenModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,8 +27,10 @@
 		E078EFFC25DD430100FA2152 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E078EFFD25DD430100FA2152 /* Change_numbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Change_numbers.entitlements; sourceTree = "<group>"; };
 		E078F00C25DD45D100FA2152 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		E078F01025DD46B700FA2152 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
-		E078F01525DD725200FA2152 /* CheckHundreds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckHundreds.swift; sourceTree = "<group>"; };
+		E078F01025DD46B700FA2152 /* NumberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberModel.swift; sourceTree = "<group>"; };
+		E078F01525DD725200FA2152 /* HundredModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HundredModel.swift; sourceTree = "<group>"; };
+		E078F01E25DDA12B00FA2152 /* UnitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitModel.swift; sourceTree = "<group>"; };
+		E078F02325DDA17100FA2152 /* TenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +102,10 @@
 		E078F00F25DD46A600FA2152 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E078F01025DD46B700FA2152 /* Number.swift */,
-				E078F01525DD725200FA2152 /* CheckHundreds.swift */,
+				E078F01025DD46B700FA2152 /* NumberModel.swift */,
+				E078F01525DD725200FA2152 /* HundredModel.swift */,
+				E078F02325DDA17100FA2152 /* TenModel.swift */,
+				E078F01E25DDA12B00FA2152 /* UnitModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E078F01125DD46B700FA2152 /* Number.swift in Sources */,
+				E078F01125DD46B700FA2152 /* NumberModel.swift in Sources */,
 				E078EFF625DD430100FA2152 /* ViewController.swift in Sources */,
-				E078F01625DD725200FA2152 /* CheckHundreds.swift in Sources */,
+				E078F01F25DDA12B00FA2152 /* UnitModel.swift in Sources */,
+				E078F01625DD725200FA2152 /* HundredModel.swift in Sources */,
+				E078F02425DDA17100FA2152 /* TenModel.swift in Sources */,
 				E078F00D25DD45D100FA2152 /* ViewModel.swift in Sources */,
 				E078EFF425DD430100FA2152 /* AppDelegate.swift in Sources */,
 			);

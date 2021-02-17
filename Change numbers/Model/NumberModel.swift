@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Number {
+struct NumberModel {
     let unitsRus: Dictionary<Int,String> = [1: "аз", 2: "веди", 3: "глаголь", 4: "добро",
                                             5: "есть", 6: "зело", 7: "земля", 8: "иже", 9: "фита"]
     
@@ -33,7 +33,7 @@ struct Number {
                                                 "vier": 4, "funf": 5, "sechs": 6,
                                                 "sieben": 7, "acht": 8, "neun": 9]
     
-    var hundred: Int?
-    var ten: Int?
-    var unit: Int?
+    var currentHundred: Int?
+    var currentTen: Int?
+    var currentUnit: Int?
 }
