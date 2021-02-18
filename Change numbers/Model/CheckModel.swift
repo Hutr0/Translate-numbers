@@ -40,6 +40,7 @@ import Foundation
 class CheckTens {
    var checked: Bool = false
    var isUniqueTen: Bool = false
+    var uniqueChecked: Bool = false
    
    func checkUniqueTens(word: [Character], _ number: NumberModel) -> Int? {
        for uniqueTen in number.uniqueTens {
@@ -49,7 +50,8 @@ class CheckTens {
                return uniqueTen.value
            }
        }
-       
+        uniqueChecked = true
+    
        // ОШИБКА
        return nil
    }
