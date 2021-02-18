@@ -30,7 +30,8 @@ class ViewController: NSViewController {
             resultLabel.stringValue = "ОШИБКА: Строка пуста."
             return
         }
-        viewModel.startTranslating(string)
+        viewModel.getNumber(string)
+        resultLabel.stringValue = viewModel.resultString
     }
 }
 
