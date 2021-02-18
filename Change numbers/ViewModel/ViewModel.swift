@@ -10,82 +10,88 @@ import Foundation
 class ViewModel {
     
     var numberModel = NumberModel()
-    
-    var hunderedModel = HundredModel()
-    var tenModel = TenModel()
-    var unitModel = UnitModel()
+    var checkHundreds = CheckHundreds()
+    var checkTens = CheckTens()
+    var checkUnits = CheckUnits()
     
     func startTranslating(_ string: String) {
         if string.lowercased().contains("hundert") {
             
-            hunderedModel = HundredModel()
-            
             var word: [Character] = []
             var previousWord: [Character] = []
             var previousCharacter: Character?
-                
+            
             for character in string {
                 if character != " " {
                     
                     // Пофиксить баг с пробелом
+                    // Пофиксить баг с многократным использованием
+                    // Пофиксить 101
+                    // Пофиксить не подряд идущие символы
                     
                     word.append(character)
                 } else {
                     if previousCharacter != " " && previousCharacter != nil {
                         
-                        if hunderedModel.checked == false {
-                            
-                            if hunderedModel.isHundred == false {
-                                numberModel.currentHundred = hunderedModel.checkHundreds(word, numberModel)
+                        if checkHundreds.checked == false {
+                            let result = checkHundreds.checkHundreds(word, numberModel)
+                            if result != nil {
+                                numberModel.currentHundred = result
                             }
-                            
-                            if hunderedModel.isHundred == false && String(word).lowercased() == "hundert" {
-                                numberModel.currentHundred = hunderedModel.checkUnitHundreds(previousWord, numberModel)
+                            if checkHundreds.isHundred == false && String(word).lowercased() == "hundert" {
+                                let result = checkHundreds.checkUnitHundreds(previousWord, numberModel)
+                                if result != nil {
+                                    numberModel.currentHundred = result
+                                }
+                            }
+                        } else {
+                            if checkUnits.checked == false {
+                                let result = checkTens.checkUniqueTens(word: word, numberModel)
+                                if result != nil {
+                                    numberModel.currentTen = result
+                                }
+                            }
+                            if checkTens.checked == false && String(word).lowercased() == "und" {
+                                let result = checkUnits.checkUnits(previousWord: previousWord, numberModel)
+                                if result != nil {
+                                    numberModel.currentUnit = result
+                                }
                             }
                         }
                         
-                        if hunderedModel.isHundred == true || hunderedModel.isUnitHundred == true {
-                            checkNext(word, previousWord)
-                            
-                            if tenModel.checked == false {
-                                checkCheckNext(word, previousWord)
-                            }
-                            if unitModel.checked == false {
-                                    print("123")
+                        if checkTens.isUniqueTen == false && checkUnits.checked == true && String(word).lowercased() == "zig" {
+                            let result = checkTens.checkTens(previousWord: previousWord, numberModel)
+                            if result != nil {
+                                numberModel.currentTen = result
                             }
                         }
-                        
-                        
-                        
                     }
                     previousWord = word
                     word = []
                 }
                 previousCharacter = character
             }
-            if hunderedModel.isHundred == false && hunderedModel.isUnitHundred == false {
-                // ОШИБКА
-            }
-        }
-        
-        print("First: \(numberModel.currentHundred), second: \(numberModel.currentTen), third: \(numberModel.currentUnit)")
-    }
-    
-    func checkNext(_ word: [Character], _ previousWord: [Character]) {
-        if String(word).lowercased() == "und" {
-            numberModel.currentUnit = unitModel.checkUnits(word, previousWord, numberModel)
-            
+            print("\(numberModel.currentHundred ?? -1) : \(numberModel.currentTen ?? -1) : \(numberModel.currentUnit ?? -1)")
             // ОШИБКА
-        } else {
-            numberModel.currentTen = tenModel.checkTens(word, previousWord, numberModel)
-            
-            // ОШИБКА
-        }
-    }
-    
-    func checkCheckNext(_ word: [Character], _ previousWord: [Character]) {
-        if String(word).lowercased() == "zig" {
-            numberModel.currentTen = tenModel.checkCheckTens(word, previousWord, numberModel)
         }
     }
 }
+
+//    func checkNext(_ word: [Character], _ previousWord: [Character]) {
+//        if String(word).lowercased() == "und" {
+//            numberModel.currentUnit = unitModel.checkUnits(word, previousWord, numberModel)
+//
+//            // ОШИБКА
+//        } else {
+//            numberModel.currentTen = tenModel.checkTens(word, previousWord, numberModel)
+//
+//            // ОШИБКА
+//        }
+//    }
+//
+//    func checkCheckNext(_ word: [Character], _ previousWord: [Character]) {
+//        if String(word).lowercased() == "zig" {
+//            numberModel.currentTen = tenModel.checkCheckTens(word, previousWord, numberModel)
+//        }
+//    }
+//}
