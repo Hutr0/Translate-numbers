@@ -28,7 +28,6 @@ class ViewModel {
             for character in string {
                 if character != " " {
                     
-                    // Пофиксить 101
                     // Пофиксить не подряд идущие символы
                     
                     word.append(character)
@@ -56,6 +55,11 @@ class ViewModel {
                             }
                             if checkTens.checked == false && String(word).lowercased() == "und" {
                                 let result = checkUnits.checkUnits(previousWord: previousWord, numberModel!)
+                                if result != nil {
+                                    numberModel!.currentUnit = result
+                                }
+                            } else if checkTens.checked == false && index == string.count - 1 {
+                                let result = checkUnits.checkUnits(previousWord: word, numberModel!)
                                 if result != nil {
                                     numberModel!.currentUnit = result
                                 }
