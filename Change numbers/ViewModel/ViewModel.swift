@@ -27,11 +27,6 @@ class ViewModel {
             
             for character in string {
                 if character != " " {
-                    
-                    // Пофиксить не подряд идущие символы
-                    // Добавить обработчик ошибок
-                    // 200 -1 -1 и т.д.
-                    
                     word.append(character)
                 }
                 if character == " " || index == string.count - 1 {
@@ -98,13 +93,8 @@ class ViewModel {
         let startTen = num.currentTen
         let startUnit = num.currentUnit
         
-        var resultHundred: Int = 0
-        var resultTen: Int = 0
-        var resultUnit: Int = 0
-        
         for hundred in array.hundredsRus {
             if startHundred == hundred.key {
-//                resultHundred = hundred.value
                 resultString = hundred.value
             }
         }
@@ -112,7 +102,6 @@ class ViewModel {
         if num.isUniqueUnit == true {
             for unit in array.unitsRus {
                 if startUnit == unit.key {
-//                    resultUnit = unit.value
                     resultString.append(" " + unit.value)
                 }
             }
@@ -120,13 +109,11 @@ class ViewModel {
             if num.isUniqueTen == false {
                 for ten in array.tensRus {
                     if startTen == ten.key {
-//                        resultTen = ten.value
                         resultString.append(" " + ten.value)
                     }
                 }
                 for unit in array.unitsRus {
                     if startUnit == unit.key {
-//                        resultUnit = startUnit!
                         resultString.append(" " + unit.value)
                     }
                 }
@@ -139,13 +126,11 @@ class ViewModel {
                 
                 for ten in array.tensRus {
                     if tenValue == ten.key {
-//                        resultTen = tenValue
                         resultString.append(" " + ten.value)
                     }
                 }
                 for unit in array.unitsRus {
                     if unitValue == unit.key {
-//                        resultUnit = unitValue
                         resultString.append(" " + unit.value)
                     }
                 }
