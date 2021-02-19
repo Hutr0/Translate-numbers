@@ -9,13 +9,12 @@ import Foundation
 
 class ViewModel {
     
-    var numberModel: NumberModel?
     var resultString: String = ""
 
     func getNumber(_ string: String) {
         if string.lowercased().contains("hundert") {
             
-            numberModel = NumberModel()
+            var numberModel = NumberModel()
             let checkHundreds = CheckHundreds()
             let checkTens = CheckTens()
             let checkUnits = CheckUnits()
@@ -35,32 +34,36 @@ class ViewModel {
                         if checkHundreds.checked == false {
                             let result = checkHundreds.checkHundreds(word)
                             if result != nil {
-                                numberModel!.currentHundred = result
+                                numberModel.currentHundred = result
                             }
                             if checkHundreds.isHundred == false && String(word).lowercased() == "hundert" {
+                                if index == string.count - 1 {
+                                    numberModel.currentHundred = 100
+                                    continue
+                                }
                                 let result = checkHundreds.checkUnitHundreds(previousWord)
                                 if result != nil {
-                                    numberModel!.currentHundred = result
+                                    numberModel.currentHundred = result
                                 }
                             }
                         } else {
                             if checkUnits.checked == false && checkTens.uniqueChecked == false {
                                 let result = checkTens.checkUniqueTens(word: word)
                                 if result != nil {
-                                    numberModel!.currentTen = result
-                                    numberModel!.isUniqueTen = true
+                                    numberModel.currentTen = result
+                                    numberModel.isUniqueTen = true
                                 }
                             }
                             if checkTens.checked == false && String(word).lowercased() == "und" {
                                 let result = checkUnits.checkUnits(previousWord: previousWord)
                                 if result != nil {
-                                    numberModel!.currentUnit = result
+                                    numberModel.currentUnit = result
                                 }
                             } else if checkTens.checked == false && index == string.count - 1 {
                                 let result = checkUnits.checkUnits(previousWord: word)
                                 if result != nil {
-                                    numberModel!.currentUnit = result
-                                    numberModel!.isUniqueUnit = true
+                                    numberModel.currentUnit = result
+                                    numberModel.isUniqueUnit = true
                                 }
                             }
                         }
@@ -68,7 +71,7 @@ class ViewModel {
                         if checkTens.isUniqueTen == false && checkUnits.checked == true && String(word).lowercased() == "zig" {
                             let result = checkTens.checkTens(previousWord: previousWord)
                             if result != nil {
-                                numberModel!.currentTen = result
+                                numberModel.currentTen = result
                             }
                         }
                         previousWord = word
@@ -78,10 +81,10 @@ class ViewModel {
                 previousCharacter = character
                 index += 1
             }
-            print("\(numberModel!.currentHundred ?? -1) : \(numberModel!.currentTen ?? -1) : \(numberModel!.currentUnit ?? -1)")
+            print("\(numberModel.currentHundred ?? -1) : \(numberModel.currentTen ?? -1) : \(numberModel.currentUnit ?? -1)")
             // ОШИБКА
             
-            translateNumber(numberModel!)
+            translateNumber(numberModel)
         }
     }
     
@@ -106,7 +109,7 @@ class ViewModel {
                 }
             }
         } else {
-            if num.isUniqueTen == false {
+            if num.isUniqueTen != true {
                 for ten in array.tensRus {
                     if startTen == ten.key {
                         resultString.append(" " + ten.value)
@@ -144,10 +147,6 @@ extension String {
 }
 
 extension Character {
-    var toString: String { return String(self) }
-}
-
-extension Int {
     var toString: String { return String(self) }
 }
 
