@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ArrayModel {
+struct ExampleModel {
     let unitsRus: Dictionary<Int,String> = [1: "аз", 2: "веди", 3: "глаголь", 4: "добро", 5: "есть", 6: "зело", 7: "земля", 8: "иже", 9: "фита"]
     
     let tensRus: Dictionary<Int,String> = [10: "и", 20:"како", 30: "люди", 40: "мыслете", 50: "наш", 60: "кси", 70: "он", 80: "покой", 90: "червь"]

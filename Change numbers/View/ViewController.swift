@@ -16,6 +16,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        numberTextField.stringValue = "ein hundert ein und vier zig"
     }
 
     override var representedObject: Any? {
@@ -26,11 +28,22 @@ class ViewController: NSViewController {
 
     @IBAction func translateButtonAction(_ sender: NSButton) {
         let string = numberTextField.stringValue
+        
         guard string != "" else {
             resultLabel.stringValue = "ОШИБКА: Строка пуста."
             return
         }
+        
         viewModel.getNumber(string)
+        
+        let error = ErrorDetectionModel.model.error.getStringError()
+        guard error == nil else {
+            resultLabel.textColor = .red
+            resultLabel.stringValue = "ОШИБКА: \(error!)"
+            ErrorDetectionModel.model.error = ErrorManager()
+            return
+        }
+        resultLabel.textColor = .black
         resultLabel.stringValue = viewModel.resultString
     }
 }
