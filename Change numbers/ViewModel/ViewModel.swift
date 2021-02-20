@@ -10,7 +10,7 @@ import Foundation
 class ViewModel {
     
     var resultString: String = ""
-
+    
     func getNumber(_ string: String) {
         if string.lowercased().contains("hundert") {
             
@@ -22,30 +22,34 @@ class ViewModel {
             var word: [Character] = []
             var previousWord: [Character] = []
             var previousCharacter: Character = " "
-            var index: Int = 0
+            var index: Int = 1
+            var check: Bool?
             
             for character in string {
                 if character != " " {
                     word.append(character)
                 }
-                if character == " " || index == string.count - 1 {
+                if character == " " || index == string.count {
                     if previousCharacter != " " {
                         
                         if checkHundreds.checked == false {
                             let result = checkHundreds.checkHundreds(word)
                             if result != nil {
                                 numberModel.currentHundred = result
+                                check = true
                             }
                             if checkHundreds.isHundred == false && String(word).lowercased() == "hundert" {
                                 let result = checkHundreds.checkUnitHundreds(previousWord)
                                 if result != nil {
                                     numberModel.currentHundred = result
+                                    check = true
                                 }
-                                if checkHundreds.isUnitHundred == true && index == string.count - 1 {
-                                    numberModel.currentHundred = 100
-                                    checkHundreds.checked = true
-                                    continue
-                                }
+//                                if checkHundreds.isUnitHundred != true {
+//                                    numberModel.currentHundred = 100
+//                                    checkHundreds.checked = true
+//                                    check = true
+//                                    continue
+//                                }
                             }
                         } else {
                             // Один раз проверяет уникальный десяток 
@@ -54,60 +58,101 @@ class ViewModel {
                                 if result != nil {
                                     numberModel.currentTen = result
                                     numberModel.isUniqueTen = true
+                                    check = true
                                 }
                             }
                             
                             if checkTens.checked == false && String(word).lowercased() == "und" {
                                 let result = checkUnits.checkUnits(previousWord: previousWord)
                                 if result != nil {
-                                    if index == string.count - 1 {
-                                        // MARK: ОШИБКА und
+                                    if index == string.count {
+                                        // MARK: ОШИБКА недопустимая 'und'
                                         ErrorDetectionModel.model.error.invalidUnd = true
                                         return
                                     }
                                     numberModel.currentUnit = result
+                                    check = true
                                 }
-                            } else if checkTens.checked == false && checkUnits.checked == false && index == string.count - 1 {
+                            } else if checkTens.checked == false && checkUnits.checked == false && index == string.count {
                                 let result = checkUnits.checkUnits(previousWord: word)
                                 if result != nil {
                                     numberModel.currentUnit = result
                                     numberModel.isUniqueUnit = true
+                                    check = true
                                 }
                             }
                         }
                         
-                        if checkTens.isUniqueTen == false /* && checkUnits.checked == true */ && String(word).lowercased() == "zig" {
+                        if checkTens.isUniqueTen == false && String(word).lowercased() == "zig" {
                             let result = checkTens.checkTens(previousWord: previousWord)
                             if result != nil {
                                 numberModel.currentTen = result
+                                check = true
                             }
                         }
                         
-//                        if check == false && String(word).lowercased() != "hundert" && String(word).lowercased() != "und" && String(word).lowercased() != "zig" {
-//                            // MARK: ОШИБКА неразрешённое слово
-//                            ErrorDetectionModel.model.error.errorNumber = true
-//                            return
-//                        }
+                        if previousWord == [] && checkHundreds.checked != true {
+                            check = false
+                        } else if checkHundreds.isUnitHundred == true ||
+                                    (String(previousWord).lowercased().contains("hundert") && checkHundreds.checked == true) ||
+                                    (String(previousWord).lowercased() == "und" && checkUnits.checked == true) {
+                            check = false
+                        }
+                        if check == nil && String(word).lowercased() != "hundert" && String(word).lowercased() != "und" && String(word).lowercased() != "zig" {
+                            // MARK: ОШИБКА неразрешённое слово
+                            ErrorDetectionModel.model.error.unresolvedWord = true
+                            return
+                        }
                         
                         previousWord = word
                         word = []
                     }
                 }
+                
+                if previousCharacter == " " && character != " " {
+                    if String(previousWord).lowercased() == "zig" {
+                        // MARK: ОШИБКА after zig
+                        ErrorDetectionModel.model.error.afterZig = true
+                        return
+                    } else if numberModel.isUniqueTen == true && String(previousWord).lowercased() == String(checkTens.uniqueTen).lowercased() {
+                        // MARK: ОШИБКА after uniqueTen
+                        ErrorDetectionModel.model.error.invalidAfterTen = true
+                        return
+                        //                    } else if numberModel.isUniqueUnit == true && String(previousWord).lowercased() == String(checkUnits.getUniqueUnit).lowercased() {
+                        //                        // MARK: ОШИБКА after uniqueUnit
+                        //                        ErrorDetectionModel.model.error.errorNumber = true
+                        //                        return }
+                    }
+                }
+                
                 previousCharacter = character
                 index += 1
+                check = nil
             }
             print("\(numberModel.currentHundred ?? -1) : \(numberModel.currentTen ?? -1) : \(numberModel.currentUnit ?? -1)")
             
-            if numberModel.isUniqueTen != true && numberModel.isUniqueUnit != true && numberModel.currentTen == nil {
-                // MARK: ОШИБКА zig
-                ErrorDetectionModel.model.error.invalidTen = true
-                return
-            }
+//            if numberModel.isUniqueHundred == true && previousWord != [] && index == string.count {
+//                ErrorDetectionModel.model.error.invalidHundert = true
+//                return
+//            }
+//
+//            if numberModel.isUniqueTen != true && numberModel.isUniqueUnit != true && numberModel.isUniqueHundred != true && index == string.count {
+//                if numberModel.currentUnit == nil {
+//                    // MARK: ОШИБКА unit
+//                    ErrorDetectionModel.model.error.invalidUnit = true
+//                    return
+//                }
+//                if numberModel.currentTen == nil {
+//                    // MARK: ОШИБКА ten
+//                    ErrorDetectionModel.model.error.invalidTen = true
+//                    return
+//                }
+//            }
             
             translateNumber(numberModel)
         } else {
             // MARK: ОШИБКА hundert
-            ErrorDetectionModel.model.error.errorNumber = true
+            ErrorDetectionModel.model.error.invalidHundert = true
             return 
         }
     }
