@@ -30,7 +30,6 @@ class CheckHundreds {
     func checkUnitHundreds(_ word: [Character]) -> Int? {
         for hundred in example.unitHundreds {
             if hundred.key.lowercased() == String(word).lowercased() {
-                self.isUnitHundred = true
                 self.checked = true
                 return hundred.value * 100
             }
@@ -45,14 +44,12 @@ class CheckTens {
     var checked: Bool = false
     var isUniqueTen: Bool = false
     var uniqueChecked: Bool = false
-    var uniqueTen: String = ""
     
     func checkUniqueTens(word: [Character]) -> Int? {
         for uniqueTen in example.uniqueTens {
             if uniqueTen.key.lowercased() == String(word).lowercased() {
                 self.isUniqueTen = true
                 self.checked = true
-                self.uniqueTen = uniqueTen.key
                 return uniqueTen.value
             }
         }
@@ -76,14 +73,11 @@ class CheckTens {
 }
 
 class CheckUnits {
-    //private var uniqueUnit: String = ""
     var checked: Bool = false
-    //var getUniqueUnit: String { get { return uniqueUnit } }
     
     func checkUnits(previousWord word: [Character]) -> Int? {
         for unit in example.units {
             if unit.key.lowercased() == String(word).lowercased() {
-               // uniqueUnit = unit.key
                 self.checked = true
                 return unit.value
             }
