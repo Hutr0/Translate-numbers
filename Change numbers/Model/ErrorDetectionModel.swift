@@ -16,18 +16,26 @@ class ErrorDetectionModel {
 
 struct ErrorManager {
     
-    var errorNumber: Bool = false { didSet {currentError = .errorNumber} }
-    var invalidUnd: Bool = false { didSet {currentError = .invalidUnd} }
+    var invalidUnit: Bool = false { didSet {currentError = .invalidUnit} }
     var invalidTen: Bool = false { didSet {currentError = .invalidTen} }
+    var invalidHundert: Bool = false { didSet {currentError = .invalidHundert} }
+    var invalidUnd: Bool = false { didSet {currentError = .invalidUnd} }
+    var unresolvedWord: Bool = false { didSet {currentError = .unresolvedWord} }
+    var afterZig: Bool = false { didSet {currentError = .afterZig} }
+    var invalidAfterTen: Bool = false { didSet {currentError = .invalidAfterTen} }
     
     private enum typeOfErrors {
-        case errorNumber
-        case invalidUnd
+        case invalidUnit
         case invalidTen
+        case invalidHundert
+        case invalidUnd
+        case unresolvedWord
+        case afterZig
+        case invalidAfterTen
         case non
     }
     
-    private let stringError: [typeOfErrors: String] = [.errorNumber: "Число введено неверно", .invalidUnd: "Недопустимое 'und'", .invalidTen: "Ошибка десятка"]
+    private let stringError: [typeOfErrors: String] = [.invalidUnit: "Единица введена неверно", .invalidTen: "Десяток введён неверно", .invalidHundert: "Сотня введена неверно", .invalidUnd: "Недопустимое 'und'", .unresolvedWord: "Число введено неверно", .afterZig: "Имеются симовлы после 'zig'", .invalidAfterTen: "Имеются симовлы после десятка"]
     
     private var currentError: typeOfErrors = .non
     
