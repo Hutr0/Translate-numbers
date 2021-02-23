@@ -76,14 +76,13 @@ class CheckTens {
 }
 
 class CheckUnits {
-    //private var uniqueUnit: String = ""
     var checked: Bool = false
-    //var getUniqueUnit: String { get { return uniqueUnit } }
+    var uniqueUnit: String = ""
     
     func checkUnits(previousWord word: [Character]) -> Int? {
         for unit in example.units {
             if unit.key.lowercased() == String(word).lowercased() {
-               // uniqueUnit = unit.key
+               uniqueUnit = unit.key
                 self.checked = true
                 return unit.value
             }

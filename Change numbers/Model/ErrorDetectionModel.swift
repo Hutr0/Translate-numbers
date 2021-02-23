@@ -23,6 +23,7 @@ struct ErrorManager {
     var unresolvedWord: Bool = false { didSet {currentError = .unresolvedWord} }
     var afterZig: Bool = false { didSet {currentError = .afterZig} }
     var invalidAfterTen: Bool = false { didSet {currentError = .invalidAfterTen} }
+    var invalidAfterUnit: Bool = false { didSet {currentError = .invalidAfterUnit} }
     
     private enum typeOfErrors {
         case invalidUnit
@@ -32,10 +33,11 @@ struct ErrorManager {
         case unresolvedWord
         case afterZig
         case invalidAfterTen
+        case invalidAfterUnit
         case non
     }
     
-    private let stringError: [typeOfErrors: String] = [.invalidUnit: "Единица введена неверно", .invalidTen: "Десяток введён неверно", .invalidHundert: "Сотня введена неверно", .invalidUnd: "Недопустимое 'und'", .unresolvedWord: "Число введено неверно", .afterZig: "Имеются симовлы после 'zig'", .invalidAfterTen: "Имеются симовлы после десятка"]
+    private let stringError: [typeOfErrors: String] = [.invalidUnit: "Единица введена неверно", .invalidTen: "Десяток введён неверно", .invalidHundert: "Сотня введена неверно", .invalidUnd: "Недопустимое 'und'", .unresolvedWord: "Число введено неверно", .afterZig: "Имеются симовлы после 'zig'", .invalidAfterTen: "Имеются симовлы после десятка", .invalidAfterUnit: "Имеются символы после единицы"]
     
     private var currentError: typeOfErrors = .non
     
